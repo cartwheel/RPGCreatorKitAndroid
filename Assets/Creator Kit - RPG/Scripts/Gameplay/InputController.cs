@@ -1,6 +1,7 @@
 using RPGM.Core;
 using RPGM.Gameplay;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RPGM.UI
 {
@@ -11,6 +12,10 @@ namespace RPGM.UI
     {
         public float stepSize = 0.1f;
         public float moveSpeed = 5f;
+
+        public Text text;
+        public Text text2;
+
         GameModel model = Schedule.GetModel<GameModel>();
 
         // Touch controls
@@ -69,13 +74,18 @@ namespace RPGM.UI
         void CharacterControl()
         {
 
+
             if (isMoving)
+            {
                 currentDistanceToTouchPos = (touchPosition - transform.position).magnitude;
+                Debug.Log(currentDistanceToTouchPos);
+                text.text = currentDistanceToTouchPos.ToString();
+            }
 
             if (Input.touchCount > 0)
             {
                 touch = Input.GetTouch(0);
-
+                text2.text = touch.position.ToString();
 
                 if (touch.phase == TouchPhase.Began) { 
                     previousDistanceToTouchPos = 0;
